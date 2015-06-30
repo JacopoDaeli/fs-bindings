@@ -1,6 +1,6 @@
 {
   "name": "fs-bindings",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "File System bindings for Node.js inspired by AWS S3 SDK.",
   "main": "index.js",
   "scripts": {

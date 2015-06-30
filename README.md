@@ -1,5 +1,5 @@
 # fs-bindings
-
+File System bindings for Node.js inspired by AWS S3 SDK.
 
 ## Usage
 
@@ -35,8 +35,6 @@ fs.createBucket({ Bucket: 'awesome' }, function(err, response) {
 
 
 ## Implementation
-
-File System bindings for Node.js inspired by AWS S3 SDK.
 
 ```
 class FS {
@@ -153,4 +151,4 @@ class File {
 
 - Implementing `FS.deleteObjects(...)` method
 - Object versioning
-- Buckets as website 
+- Buckets as website
