@@ -1,3 +1,3 @@
 'use strict';
 
-exports.FS = require('lib/fs');
+exports.FS = require('./lib/fs');

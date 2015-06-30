@@ -1,4 +1,41 @@
 # fs-bindings
+
+
+## Usage
+
+```
+const FS = require('./index').FS;
+const fs = new FS({ rootFolder: `path/to/root/folder` });
+
+fs.createBucket({ Bucket: 'awesome' }, function(err, response) {
+  if(err) return console.error(err);
+  console.log(`createBucket says: ${response.Location}`);
+  fs.putObject('This is amazing!', { Bucket: 'awesome', Key: 'path/to/something/amazing.txt' },
+    function(err, response) {
+      if(err) return console.error(err);
+      console.log(`putObject says: ${response.Location}`);
+      fs.getObject({ Bucket: 'awesome', Key: 'path/to/something/amazing.txt' },
+        function(err, object) {
+          if(err) return console.error(err);
+          console.log(`*** getObject returned a file ***`);
+          console.log(`object.path: ${object.path}`);
+          console.log(`object.CreationDate: ${object.CreationDate}`);
+          console.log(`object.LastModified: ${object.LastModified}`);
+          console.log(`object.ContentLength: ${object.ContentLength}`);
+          console.log(`object.Body: ${object.Body.toString()}`);
+          fs.deleteObject({ Bucket: 'awesome', Key: 'path/to/something/amazing.txt' },
+            function(err, object) {
+              if(err) return console.error(err);
+              console.log(`deleteObject says: ${response.Location}`);
+          });
+      });
+  });
+});
+```
+
+
+## Implementation
+
 File System bindings for Node.js inspired by AWS S3 SDK.
 
 ```
@@ -8,11 +45,10 @@ class FS {
    * constructor - Constructs a FS object
    *
    * @param {Object} params
-   * @return {Object}
    * @api public
    */
   constructor(opts) {
-    this.rootFolder = opts.rootFolder;
+
   }
 
   /**
@@ -20,7 +56,6 @@ class FS {
    *
    * @param {Object} params
    * @param {Function} callback
-   * @return {Object}
    * @api public
    */
   createBucket(params, callback) {
@@ -32,7 +67,6 @@ class FS {
    *
    * @param {Object} params
    * @param {Function} callback
-   * @return {Object}
    * @api public
    */
   deleteBucket() {
@@ -44,7 +78,6 @@ class FS {
    *
    * @param {Object} params
    * @param {Function} callback
-   * @return {Object}
    * @api public
    */
   putObject(params, callback) {
@@ -56,7 +89,6 @@ class FS {
    *
    * @param {Object} params
    * @param {Function} callback
-   * @return {Object}
    * @api public
    */
   getObject(params, callback) {
@@ -68,7 +100,6 @@ class FS {
    *
    * @param {Object} params
    * @param {Function} callback
-   * @return {Object}
    * @api public
    */
   deleteObject(params, callback) {
@@ -80,7 +111,6 @@ class FS {
    *
    * @param {Object} params
    * @param {Function} callback
-   * @return {Object}
    * @api public
    */
   deleteObjects(params, callback) {
@@ -89,3 +119,38 @@ class FS {
 
 }
 ```
+
+```
+class File {
+
+  /**
+   * constructor - Constructs a File object
+   *
+   * @param {Object} params
+   * @api public
+   */
+  constructor(params) {
+
+  }
+
+  /**
+   * loadFile - Load a file from the FS
+   *
+   * @param {String} path
+   * @param {Function} callback
+   * @return {File}
+   * @api public
+   */
+  static loadFile(path, callback) {
+
+  }
+
+}
+```
+
+
+## TODO
+
+- Implementing `FS.deleteObjects(...)` method
+- Object versioning
+- Buckets as website 

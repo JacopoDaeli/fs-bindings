@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/JacopoDaeli/fs-bindings#readme",
   "dependencies": {
+    "async": "^1.3.0",
     "fs-extra": "^0.20.1"
   }
 }
